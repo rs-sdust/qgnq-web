@@ -1,0 +1,122 @@
+<!DOCTYPE html  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+	<meta quiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="jQuery/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="Javascript/windowshow.js"></script>
+	<script type="text/javascript" src="leaflet/leaflet.js"></script>
+	<link rel="stylesheet" href="leaflet/leaflet.css" />
+	<script type="text/javascript" src="Javascript/gisOperate.js"></script>
+	<script type="text/javascript" src="Javascript/getDataFromServer.js"></script>
+	<title>全国农情速报</title>
+</head>
+<body onload="loads()">
+    <div class="mapwindow">
+		<div class="head">
+			<div class="date">
+				<div id="playButton">
+					<img src="Image/开始.png">
+				</div>
+				<div id="dateRun">
+					<div id="time">
+						<!-- <ul class="uTimeshow">
+							<li><p id="mordenTime">档期产品</p></li> <li>|</li>
+							<li><p id="future">12月33日</p></li> <li>|</li>
+							<li><p id="future">12月33日</p></li> <li>|</li>
+							<li><p id="future">12月33日</p></li> <li>|</li>
+							<li><p id="future">12月33日</p></li> <li>|</li>
+							<li><p id="future">12月33日</p></li> <li>|</li>
+							<li><p id="future">12月33日</p></li> <li>|</li>
+							<li><p id="future">12月33日</p></li> <li>|</li>
+							<li><p id="future">12月33日</p></li> <li>|</li>
+							<li><p id="future">12月33日</p></li> <li>|</li>
+							<li><p id="future">12月33日</p></li> 
+						</ul> -->
+						<div class="progress-container">
+							<div class="progress-box">
+								<div class="progress-bar">
+									<div class="time-btn"></div>
+								</div>
+							</div>
+							<div class="progressbar-text">50%</div>
+						</div>
+					</div>
+					<!-- <div id="timebar"></div> -->
+				</div>
+				<div id="dateSearch"></div>
+			</div>
+		</div>
+		<div id="map"></div>
+		<div id= "leftguidediv" class="onLeft">
+			<div id="leftguide" onselectstart="return false">
+				<ul>
+					<li class="nLi on">
+						<p><img src="Image/reduce.png">产量预估</p>
+						<ul class="sub">
+							<label><li><input name="radio" type="radio"><div class="radio_option"></div><p>小麦</p></label></li> 
+							<label><li><input name="radio" type="radio"><div class="radio_option"></div><p>玉米</p></label></li> 
+							<label><li><input name="radio" type="radio"><div class="radio_option"></div><p>水稻</p></label></li> 
+							<label><li><input name="radio" type="radio"><div class="radio_option"></div><p>棉花</p></label></li> 
+							<label><li><input name="radio" type="radio"><div class="radio_option"></div><p>大豆</p></label></li> 
+						</ul>
+					</li>
+					<li class="nLi on">
+						<p><img src="Image/reduce.png">长势监测</p>
+						<ul class="sub">
+							<label><li><input name="radio" type="radio"><div class="radio_option"></div><p>小麦</p></label></li> 
+							<label><li><input name="radio" type="radio"><div class="radio_option"></div><p>玉米</p></label></li> 
+							<label><li><input name="radio" type="radio"><div class="radio_option"></div><p>水稻</p></label></li> 
+							<label><li><input name="radio" type="radio"><div class="radio_option"></div><p>棉花</p></label></li> 
+							<label><li><input name="radio" type="radio"><div class="radio_option"></div><p>大豆</p></label></li> 
+						</ul>
+					</li>
+					<li class="nLi on">
+							<p><img src="Image/reduce.png">作物面积</p>
+							<ul class="sub">
+								<label><li><input name="radio" type="radio"><div class="radio_option"></div><p>小麦</p></label></li> 
+								<label><li><input name="radio" type="radio" ><div class="radio_option"></div><p>玉米</p></label></li> 
+								<label><li><input name="radio" type="radio" ><div class="radio_option"></div><p>水稻</p></label></li> 
+								<label><li><input name="radio" type="radio" ><div class="radio_option"></div><p>棉花</p></label></li> 
+								<label><li><input name="radio" type="radio" ><div class="radio_option"></div><p>大豆</p></label></li> 
+							</ul>
+						</li>
+					<li class="nLi on">
+						<p><img src="Image/reduce.png">病虫害监测</p>
+						<ul class="sub">
+							<label><li><input name="radio" type="radio" ><div class="radio_option"></div><p>小麦白粉病</p></label></li> 
+							<label><li><input name="radio" type="radio" ><div class="radio_option"></div><p>小麦纹枯病</p></label></li> 
+							<label><li><input name="radio" type="radio" ><div class="radio_option"></div><p>小麦蛀牙</p></label></li> 
+						</ul>
+					</li>
+					<li class="nLi on">
+							<p><img src="Image/reduce.png">土壤湿度</p>
+							<ul class="sub">
+								<label><li><input name="radio" type="radio" ><div class="radio_option"></div><p>土壤湿度</p></label></li> 
+							</ul>
+						</li>
+					<li class="nLi on">
+						<p><img src="Image/reduce.png">气象数据</p>
+						<ul class="sub">
+							<label><li><input name="radio" type="radio" ><div class="radio_option"></div><p>温度</p></label></li>
+							<label><li><input name="radio" type="radio" ><div class="radio_option"></div><p>降水</p></label></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div id="controlButton" class="onLeft">
+				    <img src="Image/leftOpenbtn.png">
+    				<img class="LeftGuidebtn" src="Image/Close.png">
+			</div>
+		</div>
+		<div id="rightbutton">
+			<div class="button"><div id="earth"></div></div>
+			<div class="button"><div id="table"></div></div>
+			<div class="button"><div id="change"></div></div>
+		</div>
+		<div id= "footshow"></div>
+	</div>
+	
+	<div id="foot">
+		<p>版权所有：北京尚德智汇科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系电话：010-82084450</p>
+	</div>
+</body>
