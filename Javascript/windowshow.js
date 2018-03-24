@@ -58,9 +58,6 @@ $(function()
             $(this).find("img").attr('src',"Image/暂停.png");
             setTimeBarVale(GetDateArr(20));
             $(this).addClass("on");
-            
-            //alert(setTimeBarVale(GetDateArr(20)));
-            
 	 	};
 	 });
 });
