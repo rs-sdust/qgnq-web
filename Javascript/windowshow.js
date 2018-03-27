@@ -1,4 +1,12 @@
 // 界面的操作和展示
+$(document).ready(function (e) {
+    // var dd =new Date();
+     // alert(Date());
+     $("#inputandimg #date").dateSelect();
+     var start = getstartDate();
+     $("#dateSearch #inputandimg #input").val(start);
+     SetProgressTime(null, start, 10)
+ });
 //左侧边栏上部菜单的展开关闭
 ;$(function()
 	{
@@ -44,79 +52,3 @@ $(function()
 	 	};
 	 });
 });
-//播放按钮
-$(function()
-{
-	 $(".head .date #playButton").click(function()
-	 {
-	 	if ($(this).hasClass("on"))
-	 	{
-            $(this).find("img").attr('src',"Image/开始.png");
-            $(this).removeClass("on");
-	 	}else
-	 	{
-            $(this).find("img").attr('src',"Image/暂停.png");
-            setTimeBarVale(GetDateArr(20));
-            $(this).addClass("on");
-	 	};
-	 });
-});
-
-function setTimeBarVale(datearr)
-{
-    var eachcount = 0;
-    // for(var i =0;i<datearr.length;i++)
-    // {(function(e){
-    //         setTimeout(function(){console.log(e);},1000);
-    //     })
-    // }
-    if($(".progress-container .progress-box .progress-bar").width()==0)
-    {
-        $.each(datearr,function(index,value){
-            setTimeout(function(){
-                if ($(".head .date #playButton").hasClass("on"))
-                {
-                    $(".progress-container .progress-box .progress-bar").width(((index+1)/20*430)+"px");
-                    $(".progress-container .progress-box .time-btn").css("left",((index+1)/20*431)-18+"px");
-                    $("#dateRun .progressbar-text").text(value);  
-                }  
-            },index*500);
-        });
-    }
-    else
-    {
-        $.each(datearr,function(index,value){
-            setTimeout(function(){
-                if ($(".head .date #playButton").hasClass("on"))
-                {
-                    $(".progress-container .progress-box .progress-bar").width(((index+1)/20*430)+"px");
-                    $(".progress-container .progress-box .time-btn").css("left",((index+1)/20*431)-18+"px");
-                    $("#dateRun .progressbar-text").text(value);  
-                }  
-            },index*500);
-        });
-    }
-
-    // alert(eachcount);
-}
-function GetDateStr(AddDayCount) 
-{ 
-    var dd = new Date(); 
-    dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
-    var y = dd.getFullYear(); 
-    var m = dd.getMonth()+1;//获取当前月份的日期 
-    var d = dd.getDate(); 
-    return y+"年"+m+"月"+d+"日"; 
-} 
-function GetDateArr(daycount) 
-{ 
-    var arr=[];
-    for(var i =0;i<daycount;i++)
-    {
-        arr[i] = GetDateStr(i);
-    }
-    return arr;
-} 
-// function setValue(daycount) {
-//     setInterval(setTimeBarVale(daycount),10000);
-//   }

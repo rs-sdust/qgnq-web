@@ -2,8 +2,11 @@
 <head>
 	<meta quiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/dateSelect.css">
 	<script type="text/javascript" src="jQuery/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="Javascript/windowshow.js"></script>
+	<script type="text/javascript" src="Javascript/TimeBar.js"></script>
+	<script type="text/javascript" src="Javascript/dateSelect.js"></script>	
 	<script type="text/javascript" src="leaflet/leaflet.js"></script>
 	<link rel="stylesheet" href="leaflet/leaflet.css" />
 	<script type="text/javascript" src="Javascript/gisOperate.js"></script>
@@ -13,24 +16,41 @@
 <body onload="loads()">
     <div class="mapwindow">
 		<div class="head">
-			<div class="date">
-				<div id="playButton">
-					<img src="Image/开始.png">
-				</div>
+		</div>
+		<div class="date">
 				<div id="dateRun">
-					<div id="time">
-						<div class="progress-container">
-							<div class="progress-box">
-								<div class="progress-bar">
-									<div class="time-btn"></div>
-								</div>
+					<div class="box">
+						<div id="progressTime_control" onclick="progressTimeControl(this)" title="开始"></div>
+						<div class="progressTime" id="progressTime" style="z-index:19">
+							<div>
+								<p id="startTime" style=" float:left;margin-left:33px;opacity: 0;display: none;"></p>
+								<p  id="endTime" style=" float:right;margin-right:33px;opacity: 0;display: none;"></p>
 							</div>
-							<div class="progressbar-text">50%</div>
+							<div id="progressTime_concent">
+								<div id="scrollBarBox">
+									<div id="scrollBar">
+										<div id="scroll_Track">
+											<div id="scroll_Btn"></div>
+										</div>	
+									</div>
+									<div id="scroll_Thumb"></div>
+								</div>
+								<div class="timecode"></div>
+							</div>
 						</div>
 					</div>
-					<!-- <div id="timebar"></div> -->
 				</div>
-				<div id="dateSearch"></div>
+		</div>
+		<div id="dateSearch">
+			<div id="searchimg"></div>
+			<div id="inputandimg">
+				<div id="input">
+					<input type="text" id="date" disabled>
+					<!-- <script type="text/javascript">
+						$("#date").dateSelect();
+					</script> -->
+				</div>
+				<div id="dateimg"></div>
 			</div>
 		</div>
 		<div id="map"></div>
