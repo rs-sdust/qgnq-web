@@ -17,7 +17,7 @@ ul,li
 	/* font-family:"å¯°î†¿è’‹é—†å‘´ç²¦"; */
 	font-size:12px;
 	position:absolute;
-	z-index:999;
+	z-index:10;
 	display:none;
 	background: #fff;
 }

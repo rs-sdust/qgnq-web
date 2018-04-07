@@ -13,6 +13,7 @@ body{
     height: 100%;
     width: 100%;
     position: absolute;
+    font-size:15px;
 }
 .mapwindow{
     position: absolute;
@@ -35,6 +36,7 @@ body{
     width: 850px;
     height: 30px;
     left: 30%;
+    /* margin: auto; */
     /* left:calc(100%-900px); */
     user-select:none;
     /* border-radius: 8px 8px 0 0 ; */
@@ -268,7 +270,7 @@ body{
 #leftguidediv{
     position: absolute;
     height: 70%;
-    width: 16%;
+    width: 20%;
     top: 8%;
     z-index: 10;
 }
@@ -278,20 +280,40 @@ body{
     width: 90%;
     background-color: rgba(0,0,0,0.5);
 	user-select:none;
-    /* margin:0 0 2px 0; */
 }
-#leftguidediv #leftguide ul{
+#leftguidediv #leftguide >ul{
 	position: relative;
 	display: inline-block;
-	overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 	width: 100%;
     height: 100%;
-    /* background-color: red; */
 }
+#leftguidediv #leftguide > ul::-webkit-scrollbar{
+    width: 5px;  
+}
+#leftguidediv #leftguide > ul::-webkit-scrollbar-track
+{
+	border-radius: 10px;
+}
+#leftguidediv #leftguide > ul::-webkit-scrollbar-thumb
+{
+	background-color: #AAA;
+	border-radius: 10px;
+	background-image: -webkit-linear-gradient(90deg,
+	                                          rgba(0, 0, 0, .2) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(0, 0, 0, .2) 50%,
+											  rgba(0, 0, 0, .2) 75%,
+											  transparent 75%,
+											  transparent)
+}
+
 #leftguidediv #leftguide .nLi{
 	position: relative;
 	top: 10px;
-	line-height: 25px;
+	/* line-height: 25px; */
     margin:0 0 10px 10px;
     display: block;
 }
@@ -302,25 +324,36 @@ body{
 	margin:0 10px 3px 10px;/*3是距底部距离，图片是14*14的，上下差3px*/
 	vertical-align:middle;/*设置图片垂直居中*/
 }
-#leftguide .nLi p{
+#leftguide .nLi >p{
 	position: relative;
 	display: inline;
     font-size: 15px;
-    line-height: 25px;
+    /* line-height: 25px; */
 	color: #fff;
 	margin: 0px 0px 10px 10px;
 	cursor: pointer;
 	/* background-color: red; */
 }
 #leftguide .nLi .sub li{
-	margin: 0px 0px 0px 35px;
-	/* background-color: rgba(44,43,43,0.3); */
+    margin: 0px 0px 2px 35px;
+    width: 75%;
+    /* background-color: rgb(44,43,43); */
     list-style: none;
 	cursor: pointer;
 }
-#leftguide .nLi .sub li input {
+#leftguide .nLi .sub li p{
+    position: relative;
+	display: inline;
+    font-size: 14px;
+    line-height: 25px;
+	color: #fff;
+	margin: 0px 0px 10px 10px;
+	cursor: pointer;
+}
+#leftguide .nLi .sub input {
 	margin: 0 0 0 1px;
-	display: inline-block;
+    display: inline-block;
+    background-color: red;
 	/*opacity: 0 ;*/
 }/*************************************************/
 /*       修改radio的原样式开始         */
@@ -341,30 +374,34 @@ body{
 	height: 13px;
 	display: inline-block;
 	background-size: cover;
-	cursor: pointer;
+    cursor: pointer;
 	background-image: url(../Image/danxuan_off.png);
 }
-
-#leftguide.nLi .sub li p{
-	/* color: #fff; */
-	width: auto;
-	text-decoration: none;
-	padding: 0 0 0 10px;
-	font-size: 14px;
+#legend{
+    position: relative;
+    width: 95%;
+    color: #ffffff;
+    /* top: 2px; */
+    /*需要根据图例的个数进行动态修改*/
+    /* height: 100%; */
+    height: 150px;
+    left: 30px;
+    /* background-color: red; */
+    display: none;
 }
-/* .on{
-	display: block;
-} */
+
 #leftguide ul .nLi .sub {
-	color: #fff;
+    color: #fff;
+    height: 100%;
+    /* background-color: red; */
 	display: none;
 }
 
 #leftguide .nLi p:hover{
     text-shadow: 2px 2px 10px ;
-    /* background-color: rgb(157,3,0); */
+    background-color: rgb(157,3,0);
 }
-#leftguide .nLi .sub li:hover{
+#leftguide .nLi .sub p:hover{
 	text-shadow: 2px 2px 10px;
 }
 #leftguidediv #controlButton{
@@ -390,12 +427,12 @@ body{
 #rightbutton{
     position: absolute;
     right: 0;
-    bottom:50%; 
+    bottom:60%; 
     z-index: 10;
 }
 #rightbutton .button{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     border-radius: 8px;
     background-color: rgba(0,0,0,0.5);
@@ -405,41 +442,99 @@ body{
 }
 #rightbutton .button div{
     position: relative;
-    width: 20px;
-    height: 20px;
-    top: 10px;
     width: 30px;
     height: 30px;
-    margin: 10px 0 10px 0;
+    top: 5px;
+    margin: 3px 0 3px 0;
     margin-left:auto;
     margin-right:auto;
     background-size: cover;
+    background-position: center;
 }
 #rightbutton #earth{
-    background-image: url(../Image/地球.png);
+    background-image: url(../Image/earch.png);
 }
 #rightbutton #table{
-    background-image: url(../Image/图表-表格.png);
+    background-image: url(../Image/table.png);
 }
 #rightbutton #change{
-    background-image: url(../Image/样地变化.png);
+    background-image: url(../Image/change.png);
 }
-#footshow{
+#rightbutton .imagechange{
+    position: absolute;
+    width: 0px;
+    height: 50px;
+    right: 42px;
+    bottom: 60%;
+    background-color: #ffffff;
+    user-select: none;
+    /* display: none; */
+}
+#rightbutton .imagechange div{
+    position: relative;
+    /* display: inline-block; */
+    margin-left: 4px;
+    top: 3px;
+    width: 50px;
+    height: 44px;
+    cursor: pointer;
+    /* border-width: 1px;
+    border-style: solid;*/
+    border: solid 1px;
+    border-color:rgb(255, 255, 255); 
+    background-size: cover;
+    background-position: center;
+    display: none;
+}
+.open{
+    border-color:rgb(63, 134, 230)  !important;
+}
+#rightbutton .imagechange div:hover{
+    border-color:rgb(63, 134, 230);
+}
+#ditu{
+    background-image: url(../Image/ditu.png);
+}
+#rsimage{
+    background-image: url(../Image/img.png);
+}
+#dem{
+    background-image: url(../Image/dem.png);
+}
+.footshow{
     position: absolute;
     bottom: 0%;
     width: 100%;
     height: 20%;
-    /* border-radius: 80% 80% 0 0 ; */
-    background-color: rgba(0,0,0,0.5);
+    /* background-color: rgba(0,0,0,0.5);; */
     z-index: 10;
 }
+ .footshow .foottop{
+    position: relative;
+    height: 21px;
+    width: 108px;
+    /* background-color: red; */
+    cursor: pointer;
+    margin: auto; 
+}
+.footshow .foottop .bottombtn{
+    position: relative;
+    top: -14px;
+    left: 42%;
+}
+.footbottom{
+    position: relative;
+    height:calc(100% - 21px);
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    /* background-color:red; */
+} 
 #foot{
     position: relative;
     top: 98%;
     height: 2%;
     font-size:45%;
     z-index: 10;
-    /* background-color: red; */
 }
 #foot p{
     text-align:center;

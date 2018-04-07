@@ -165,13 +165,8 @@
      var currentDate = startDate.getDate() < 10 ? "0" + startDate.getDate() : startDate.getDate();
      var indexStart = startDate.getFullYear() + "-" + month + "-" + currentDate;
      $("#scroll_Thumb").html(indexStart);
-     if (window.parent.currentTime) {
-         currentTime = indexStart;
-     }
-    //  if (typeof (myfun) == "function") {
-    //      var jscode = new Function('return ' + myfun)();
-    //      jscode(indexStart)
-    //  }
+     //此处需要添加图层切换
+     
  }
  // 控制小滑块的当前时间，小滑块时间变化时大滑块不变
  function SetTime1(value) {
@@ -183,13 +178,6 @@
      var indexStart = month + "-" + currentDate;
      var indexStart2 = month + "-" + currentDate;
      $(".timecode").html(indexStart2);
-     if (window.parent.currentTime) {
-         currentTime = indexStart;
-     }
-    //  if (typeof (myfun) == "function") {
-    //      var jscode = new Function('return' + myfun)();
-    //      jscode(indexStart)
-    //  }
  }
  
  //开始 暂停
@@ -223,7 +211,7 @@
      $("#scroll_Track").css("width", "0px");
      ScrollBar.value = 0;
      _index = 0;
-     _speed = 500;
+     _speed = 1000;
      window.clearInterval(_mProgressTimer);
      SetTime(ScrollBar.value);
      SetInterval(_index);

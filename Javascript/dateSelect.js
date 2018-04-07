@@ -9,6 +9,8 @@
 	
 	var obj = this;		      
 	var elem_id = $(obj).attr("id");
+	//初始化显示时间
+	setStartDate(obj);
 	
 	var isShow = false;
 	var _shown = false;
@@ -263,7 +265,7 @@
     	$(this).parents("#datepicker_" + elem_id).slideUp("noraml",function(){
     		_shown = false;
 			$(".content").css({"height": ""});
-			//选择日期后，时间条响应选中的时间
+			//选择日期后，时间条响应选中的时间,所有跟日期有关的响应都在此添加
 			var start = getstartDate(date_sel);
 			SetProgressTime(1, start, 10)
     	});
@@ -402,7 +404,17 @@
     		}    		
     	}
     }
-    
+	//初始化时间显示
+	function setStartDate(obj){
+		var tz_m_str,tz_d_str; 
+		var startdate = new Date();
+		var startmonth = startdate.getMonth()+1;
+		var startday = startdate.getDate();
+    	(startmonth < 10 ) ? tz_m_str = "0" + startmonth : tz_m_str = startmonth;
+    	(startday < 10 ) ? tz_d_str = "0" + startday : tz_d_str = startday;    	 	
+    	var date_sel = startdate.getFullYear() + "-" + tz_m_str + "-" + tz_d_str;
+    	$(obj).val(date_sel);
+	}
 	    
     // 点击div外面关闭列表
     $(document).bind("click", function(event) {
