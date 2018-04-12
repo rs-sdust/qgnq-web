@@ -106,8 +106,6 @@ function highlightFeature(e) {
 function resetHighlight(e) 
 {
     polygonjson.resetStyle(e.target);
-    //调用控件info的修改方法
-    // info.update();
 }
 
 //设置Feature缩放 ，到点击的对象合适的大小    
@@ -150,5 +148,4 @@ function getmaxminvalue(jsondata){
     var d = (maxvalue-minvalue)/5;
     min_d[0]=minvalue;
     min_d[1]=d;
-    // return min_d;
 }
