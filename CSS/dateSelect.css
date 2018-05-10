@@ -12,14 +12,14 @@ ul,li
 
 .tz-datepicker
 {
-	width:210px;
+	width:220px;
 	border:solid 1px #3a98d8;	
-	/* font-family:"å¯°î†¿è’‹é—†å‘´ç²¦"; */
+	font-family:"å¯°î†¿è’‹é—†å‘´ç²¦";
 	font-size:12px;
 	position:absolute;
 	z-index:10;
 	display:none;
-	background: #fff;
+	background-color: rgb(37,105,168);
 }
 .tz-datepicker .year-month
 {
@@ -30,7 +30,8 @@ ul,li
 }
 .tz-datepicker .year-month span
 {
-	display:inline-block;
+	position: relative;
+	/* display:inline-block; */
 	height:25px;
 	line-height:25px;
 	float:left;
@@ -69,24 +70,28 @@ ul,li
 .year-month .left
 {
 	width:25px;
-	margin-left:2px;
+	margin-left:8px;
+	/* background-color: red; */
 }
 .year-month .month
 {
 	width:74px;
 	margin-left:1px;
 	position:relative;
+	/* background-color: yellow; */
 }
 .year-month .month span
 {
 	width:74px;
 	position:relative;
+	color: #fff;
 }
 .year-month .year
 {
 	width:74px;
 	margin-right:1px;
 	position:relative;	
+	color: #fff;
 }
 .year-month .year span
 {
@@ -95,23 +100,24 @@ ul,li
 }
 .year-month .right
 {
-	width:30px;	
+	width:25px;	
+	/* background-color: red; */
 }
 
 
 .year-month .month span , .year-month .year span
 {
-	background:url(image/up-default.png) no-repeat center right 6px;
+	background:url(../Image/up1.png) no-repeat center right 6px;
 }
 
 .year-month .month span:hover , .year-month .year span:hover
 {
-	background:url(image/up-active.png) #3a98d8 no-repeat center right 6px;
+	background:url(../Image/down1.png) #3a98d8 no-repeat center right 6px;
 }
 
 .year-month .month span.active , .year-month .year span.active
 {
-	background:url(image/up-active.png) #3a98d8 no-repeat center right 6px;
+	background:url(../Image/down1.png) #3a98d8 no-repeat center right 6px;
 }
 
 
@@ -120,7 +126,8 @@ ul,li
 .week
 {
 	height:25px;
-	color:#9ea7b3;
+	color: #fff;
+	background-color: rgb(37,105,168);
 }
 .week ul
 {
@@ -140,7 +147,7 @@ ul,li
 /* æ¾¶ï¿½ */
 .day
 {
-	background:#f3f3f3;
+	background-color: rgb(37,105,168);
 }
 .day ul
 {
@@ -153,26 +160,34 @@ ul,li
 	width:30px;
 	float:left;
 	text-align:center;
-	background:#fff;
+	background-color: rgb(37,105,168);
+	color: #fff;
 	margin-top:1px;
 	cursor:pointer;
 }
 .day ul li:hover
 {
-	background:#3a98d8;
-	color:#fff;
+	/* background:#3a98d8; */
+	color:rgb(233, 178, 15);
 }
 .day ul li.active
 {
-	background:#3a98d8;
-	color:#fff;
+	/* background:#3a98d8; */
+
+	color:rgb(233, 178, 15);
+}
+.day ul li.exist
+{
+	border: 1px solid yellowgreen;
+	border-radius:1rem;
+	/* color:rgb(233, 178, 15); */
 }
 
 
 /* éˆï¿½ */
 .year-month .month .month-list
 {
-	width:72px;
+	width:74px;
 	border:solid 1px #ccc;
 	border-top:none;
 	position:absolute;
@@ -209,7 +224,7 @@ ul,li
 /* é–«å¤‹å«¨éªžï¿½ */
 .year-month .year .year-list
 {
-	width:72px;
+	width:74px;
 	border:solid 1px #ccc;
 	border-top:none;
 	position:absolute;
