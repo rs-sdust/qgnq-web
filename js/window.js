@@ -269,7 +269,7 @@ $(function()
 function getcatalog(){
     $.ajax({
         type:"get",
-        url:"http://192.168.2.253/qgnq/api/Dic/getcatalog",
+        url:ipaddress+"api/Dic/getcatalog",
         data:{"client":"web"},
         dataType:"json",
         success:function(data){
