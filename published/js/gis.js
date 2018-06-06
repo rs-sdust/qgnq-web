@@ -2,7 +2,7 @@
  * @Author: wk 
  * @Date: 2018-04-17 17:12:50 
  * @Last Modified by: wk
- * @Last Modified time: 2018-05-09 18:27:46
+ * @Last Modified time: 2018-06-06 17:38:02
  */
 ;
 //获取到的geojson
@@ -14,6 +14,8 @@ var polyProvValue = [];
 var cityandcountyLayer = [];
 //当前指定的范围id
 var currentregionid = -1;
+//上一级id
+var oldRegionid = -1;
 //存放当前的范围等级
 var currentlevel = -1;
 //当前的产品时间
@@ -626,9 +628,13 @@ function getnextjson(e){
     
     //移除加载的上一级图册
     if(currentlevel !== 3){
-        currentregionid = e.sourceTarget.feature.properties.id;
+        currentregionid = e.sourceTarget.feature.properties.id;   
         if(currentlevel == 1)
+        {
             currentlevel = 2;
+            oldRegionid = e.sourceTarget.feature.properties.id;
+        }
+
         else if (currentlevel == 2) 
             currentlevel = 3;
         else {
@@ -680,7 +686,7 @@ function resetLayer(){
             var data={
                 date:currentdate,
                 level: currentlevel,
-                regionId:currentregionid,
+                regionId:oldRegionid,
                 prodType: $('input:radio[name="radio"]:checked').parent("li").attr("param0"),
                 cropType:$('input:radio[name="radio"]:checked').parent("li").attr("param1"),
                 diseaseType:$('input:radio[name="radio"]:checked').parent("li").attr("param2")
