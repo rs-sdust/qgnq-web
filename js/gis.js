@@ -35,7 +35,7 @@ var mycolortable = {
     6:['#FFFFFF','#C7E4F2','#88C5E4','#5692CE','#306BA6','#234F78','#434472'],
     7:['#AAABAD']
 }
-var ipaddress = "http://192.168.1.253/qgnq/";
+var ipaddress = "http://39.104.185.135/qgnq/";
 //初始化地图map，默认地图的中心，大小层级，以及缩放的最大最小层级
 var Ly = {
 	map: {},
