@@ -283,7 +283,7 @@
 					prodType: $('input:radio[name="radio"]:checked').parent("li").attr("param0"),
 					cropType:$('input:radio[name="radio"]:checked').parent("li").attr("param1"),
 					diseaseType:$('input:radio[name="radio"]:checked').parent("li").attr("param2")
-			}
+				}
 					/**
 					* 获取省级数据
 					*/
@@ -614,6 +614,8 @@
 		return fmt;
 	}    
 
+
+}
 	/**
  	* 
  	* 查找数组，返回匹配到的第一个index
@@ -624,7 +626,7 @@
  	* 
 	 * @return 数组下标  查找不到返回-1
  	*/
-	function findArray(array, feature, all = true) {
+	 function findArray(array, feature, all = true) {
 		for(let index in array){
 			let cur = array[index].date;
 			if(feature instanceof Object){
@@ -646,4 +648,3 @@
 		}
 		return -1;
 	}
-}

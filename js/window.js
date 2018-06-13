@@ -2,7 +2,7 @@
  * @Author: wk 
  * @Date: 2018-04-18 11:01:19 
  * @Last Modified by: wk
- * @Last Modified time: 2018-05-09 17:08:22
+ * @Last Modified time: 2018-06-13 12:05:57
  */
 $(function()
 {
@@ -108,6 +108,8 @@ $(function()
                     alert("时间序列数据加载失败，请联系管理员！"); 
                 }
         }) 
+        var start = getstartDate(currentdate);
+        SetProgressTime(null, start, 7);
         currentdate = timeserice[0].date;
         //设置显示当前数据的日期
         $("#dateSearch #inputandimg #date").text(currentdate);
@@ -236,7 +238,7 @@ $(function()
             {
                 $(".btnright").removeClass("hasopen");
                 $(".btnright").click();
-                $(".btnleft").click();
+                //$(".btnleft").click();
                 Ly.map.scrollWheelZoom.enable(); 
                 Ly.map.removeLayer(countryjson);
                 Ly.map.removeLayer(allprovdis);
@@ -258,11 +260,7 @@ $(function()
         // }
         
     })
-
-
     $("#inputandimg #date").dateSelect();
-    var start = getstartDate(currentdate);
-    SetProgressTime(null, start, 7);
 })
 /****************从服务器获取目录和geojson****************************/
 // var catalogipaddress = "http://192.168.2.254/qgnq/"

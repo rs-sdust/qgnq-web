@@ -213,7 +213,7 @@
 		else
 		{
             var newdata={
-                date:currentdate,
+                date:rundate,
                 level: currentlevel,
                 regionId:currentregionid,
                 prodType: $('input:radio[name="radio"]:checked').parent("li").attr("param0"),
