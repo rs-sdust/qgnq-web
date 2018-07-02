@@ -2,7 +2,7 @@
  * @Author: wk 
  * @Date: 2018-04-18 11:01:19 
  * @Last Modified by: wk
- * @Last Modified time: 2018-06-13 12:05:57
+ * @Last Modified time: 2018-07-02 09:58:47
  */
 $(function()
 {
@@ -81,7 +81,9 @@ $(function()
         }
     });
     $(".sidebar-menu >ul").on("click",".sidebar-submenu >li",function () { 
-        $(this).find("input").get(0).checked=true;
+        $(this).find("input")[0].checked=true;
+        $('input:radio[name="radio"]:checked').parent("li").addClass("ischecked");
+        // console.log($(this).find("input").get(0));
         // alert(currentlevel);
         var timedata= {
             prodType: $(this).attr("param0"),
@@ -97,8 +99,14 @@ $(function()
             success:function(json,status){
                 if(status =="success")
                 {
-                    timeserice = JSON.parse(json);
-                    currentdate = timeserice[0].date;
+                    // console.log(json);
+                    if(!(json == ''))
+                    {
+                        timeserice = JSON.parse(json);
+                        currentdate = timeserice[0].date;
+                    }
+                    // else
+                    //     alert("数据还未发布,请等待....");
                     // console.log(currenttime);
                 }
                 else
@@ -109,7 +117,17 @@ $(function()
                 }
         }) 
         var start = getstartDate(currentdate);
-        SetProgressTime(null, start, 7);
+        //SetProgressTime(null, start, 7);
+        var index = parseInt(findArray(timeserice,currentdate));
+        //console.log(index);
+        if(index >=7)
+        {
+            SetProgressTime(1, start, 6);
+        }
+        else
+        {
+            SetProgressTime(1, start, index);
+        }
         currentdate = timeserice[0].date;
         //设置显示当前数据的日期
         $("#dateSearch #inputandimg #date").text(currentdate);
@@ -124,6 +142,7 @@ $(function()
                 cropType:$(this).attr("param1"),
                 diseaseType:$(this).attr("param2")
             }
+            
             getInitdata(provinitdata);
         }
         else
@@ -137,10 +156,7 @@ $(function()
                 cropType:$(this).attr("param1"),
                 diseaseType:$(this).attr("param2")
             }
-            if(!isEmpty(polygonjson))
-                Ly.map.removeLayer(polygonjson);
-            if(!isEmpty(cityandcountyLayer))
-                Ly.map.removeLayer(cityandcountyLayer);
+
             /**
 	        * 获取省级数据
 	        */
@@ -153,18 +169,59 @@ $(function()
                     if(status =="success")
                     {
                         polyProvValue = JSON.parse(json);
-                        unit = polyProvValue.unit;
-                        currentlevel = parseInt(polyProvValue.level);
-                        polyProvValue.data.sort(sortById);
-                        getmaxminvalue(polyProvValue.data);
-                        addProvLayers(polyProvLayer);
-                        //添加chart
-                        barchart(polyProvValue);
+                        if(!(polyProvValue.data == null))
+                        {
+                            // preRadio = $('input:radio[name="radio"]:checked');
+                            // console.log(preRadio);
+                            // $('input:radio[name="radio"]:checked').parent("li").addClass("ischecked");
+                            // console.log($(".ischecked"));
+                            // for(var i = 0;i<$(".ischecked").length;i++)
+                            // {
+                            //     if(!$(".ischecked")[i].checked)
+                            //     {
+                            //         // ($(".ischecked")[i]).addClass("ischecked");
+                            //         console.log($(".ischecked")[i]);
+                            //     }
+                            // }
+                            $(".ischecked").each(function(){
+                                if(!$(this).find("input")[0].checked)
+                                {
+                                    $(this).removeClass("ischecked");
+                                }
+                              });
+                            unit = polyProvValue.unit;
+                            currentlevel = parseInt(polyProvValue.level);
+                            polyProvValue.data.sort(sortById);
+                            getmaxminvalue(polyProvValue.data);
+                            //删除之前的图层，减少卡顿现象
+                            if(!isEmpty(polygonjson))
+                                Ly.map.removeLayer(polygonjson);
+                            if(!isEmpty(cityandcountyLayer))
+                                Ly.map.removeLayer(cityandcountyLayer);
+                            addProvLayers(polyProvLayer);
+                            //添加chart
+                            barchart(polyProvValue);
+                        }
+                        else
+                        {  
+
+                            if($('input:radio[name="radio"]:checked').parent("li").hasClass("ischecked"))
+                                $('input:radio[name="radio"]:checked').parent("li").removeClass("ischecked");
+                            $(".ischecked").click();
+                            if(!$(".ischecked").parents(".sidebar-dropdown").hasClass("active"))
+                            {
+                                console.log($('.ischecked').parents(".sidebar-dropdown"));
+                                $(".ischecked").parent(".sidebar-submenu").prev(".first").click();
+                            }
+                            alert("此作物数据还未发布,请等待....");
+                        }
+                            
+
                     }
                     else
                         alert("wrong!");
                 },
-                error: function () {  alert("省级数据加载失败，请联系管理员！"); }
+                error: function () {  alert("网络连接出现问题，请重试！"); }
             }) 
         }
     
@@ -180,12 +237,9 @@ $(function()
         if(!$(".btnright").hasClass("hasopen"))
             {
                 $(".btnright").click();
-                $(".btnleft").click();
                 $(".btnright").addClass("hasopen");
-                // Ly.map.off('zoomend');
                 Ly.map.scrollWheelZoom.disable(); 
-                prevlevel = currentlevel;
-                // console.log(prevlevel);                 
+                prevlevel = currentlevel;           
                 currentlevel = 0;
                 var provinitdata={
                     date:currentdate,
@@ -238,7 +292,6 @@ $(function()
             {
                 $(".btnright").removeClass("hasopen");
                 $(".btnright").click();
-                //$(".btnleft").click();
                 Ly.map.scrollWheelZoom.enable(); 
                 Ly.map.removeLayer(countryjson);
                 Ly.map.removeLayer(allprovdis);

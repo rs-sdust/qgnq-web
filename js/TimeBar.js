@@ -170,10 +170,9 @@
     //  alert(indexStart);
     var rundate = indexStart;
     if(_start){
-        if(!isEmpty(polygonjson))
-		    Ly.map.removeLayer(polygonjson);
-	    if(!isEmpty(cityandcountyLayer))
-	        Ly.map.removeLayer(cityandcountyLayer);
+
+	    // if(!isEmpty(cityandcountyLayer))
+	    //     Ly.map.removeLayer(cityandcountyLayer);
 
 		if(currentlevel === 1)
 		{
@@ -196,6 +195,10 @@
 				success:function(json,status){
 						if(status =="success")
 						{
+                            if(!isEmpty(polygonjson))
+                                Ly.map.removeLayer(polygonjson);
+                            if(!isEmpty(cityandcountyLayer))
+                                Ly.map.removeLayer(cityandcountyLayer);
 							polyProvValue = JSON.parse(json);
 							currentlevel = parseInt(polyProvValue.level);
 							polyProvValue.data.sort(sortById);
@@ -243,12 +246,14 @@
      if ($(img).attr("title") == "暂停") {
          $(img).attr("title", "开始");
          _start = false;
+         timebarstart = false;
          $(img).css("background-image", "url(image/start.png)");
          window.clearInterval(_mProgressTimer);
      }else {
          $(img).attr("title", "暂停");
          $(img).css("background-image", "url(image/pause.png)");
          _start = true;
+         timebarstart = true;
          _mProgressTimer = window.setInterval(function () {
              if (_index <= ScrollBar.maxValue) {
                 ScrollBar.SetValue(_index);

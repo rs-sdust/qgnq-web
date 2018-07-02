@@ -269,11 +269,6 @@
 			//选择日期后，时间条响应选中的时间,所有跟日期有关的响应都在此添加
 			// Ly.map.removeLayer(polygonjson);
 			// polygonjson='';
-			if(!isEmpty(polygonjson))
-				Ly.map.removeLayer(polygonjson);
-			if(!isEmpty(cityandcountyLayer))
-				Ly.map.removeLayer(cityandcountyLayer);
-
 			if(currentlevel === 1)
 			{
 				var newdata={
@@ -299,6 +294,10 @@
 								currentlevel = parseInt(polyProvValue.level);
 								polyProvValue.data.sort(sortById);
 								getmaxminvalue(polyProvValue.data);
+								if(!isEmpty(polygonjson))
+									Ly.map.removeLayer(polygonjson);
+								if(!isEmpty(cityandcountyLayer))
+									Ly.map.removeLayer(cityandcountyLayer);
 								addProvLayers(polyProvLayer);
 								//添加chart
 								barchart(polyProvValue);

@@ -2,7 +2,7 @@
  * @Author: wk 
  * @Date: 2018-04-17 17:12:50 
  * @Last Modified by: wk
- * @Last Modified time: 2018-06-06 17:38:02
+ * @Last Modified time: 2018-07-01 21:04:50
  */
 ;
 //获取到的geojson
@@ -37,6 +37,10 @@ var mycolortable = {
     6:['#FFFFFF','#C7E4F2','#88C5E4','#5692CE','#306BA6','#234F78','#434472'],
     7:['#AAABAD']
 }
+
+//
+var timebarstart = false;
+//数据库地址
 var ipaddress = "http://39.104.185.135/qgnq/";
 //初始化地图map，默认地图的中心，大小层级，以及缩放的最大最小层级
 var Ly = {
@@ -52,7 +56,8 @@ var Ly = {
             doubleClickZoom:false,
 			attributionControl: false,
             zoomControl: false,
-            crs: L.CRS.EPSG3857
+            crs: L.CRS.EPSG3857,
+            animate: true
         });
         // this.map.on("zoomstart", getnextjson(1));
         // this.mapSourceControl();
@@ -115,6 +120,8 @@ function getInitdata(initdata) {
             if(status =="success")
             { 
                 polyProvValue = JSON.parse(json);
+                console.log(polyProvValue);
+                console.log("polyProvValue");
                 currentlevel = parseInt(polyProvValue.level);
                 polyProvValue.data.sort(sortById);
                 unit = polyProvValue.unit;
@@ -142,12 +149,13 @@ function getInitdata(initdata) {
                 addProvLayers(polyProvLayer);
                 //添加chart
                 barchart(polyProvValue);
+
             }
             else
                 alert("wrong!");
         },
         error: function (data) {  
-                alert("数据加载失败，请联系管理员！"); 
+                alert("省级矢量加载失败，请联系管理员！"); 
             }
     }) 
     // setLegend();
@@ -393,7 +401,7 @@ function addEchartslinePlot(pointLatlng,feature,geoPropertyData) {
 };
 //判断对象，数组是否为空,空返回为真
 function isEmpty(obj) {
-    if(obj && obj == 0 && obj == '') {　　　　　　　　　
+    if(obj && obj == 0 && obj == '' && obj == "") {　　　　　　　　　
       return true;
     }
     else {
@@ -598,6 +606,10 @@ function getGeoJSONdata(data){
             {
                 // console.log()
                 // unit = JSON.parse(json).unit;
+                if(!isEmpty(polygonjson))
+                    Ly.map.removeLayer(polygonjson);
+                if(!isEmpty(cityandcountyLayer))
+                    Ly.map.removeLayer(cityandcountyLayer);
                 addCityLayers(JSON.parse(json));
                 //添加chart
                 barchart(JSON.parse(json));
@@ -608,8 +620,6 @@ function getGeoJSONdata(data){
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {  
             alert(XMLHttpRequest.status);
-            alert(XMLHttpRequest.readyState);
-            alert(textStatus); 
             }
     }) 
 }
@@ -645,10 +655,10 @@ function getnextjson(e){
     // url=ipaddress+"api/data/GetAllDate";
         if(currentlevel > 0)
         {
-            if(!isEmpty(polygonjson))
-                Ly.map.removeLayer(polygonjson);
-            if(!isEmpty(cityandcountyLayer))
-                Ly.map.removeLayer(cityandcountyLayer);
+            // if(!isEmpty(polygonjson))
+            //     Ly.map.removeLayer(polygonjson);
+            // if(!isEmpty(cityandcountyLayer))
+            //     Ly.map.removeLayer(cityandcountyLayer);
             var data={
                 date:currentdate,
                 level: currentlevel,
@@ -730,6 +740,6 @@ function setLegend(grades)
 
 
 //时间滑动显示
-function timeslide(){
+// function timeslide(){
     
-}
+// }
